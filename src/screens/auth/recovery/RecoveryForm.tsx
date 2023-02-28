@@ -27,12 +27,12 @@ const RecoveryForm = (props: Props) => {
       try {
         setRecoveryLoading(true)
         await firebase.auth().sendPasswordResetEmail(email)
-        Alert.alert('Operación exitosa', 'Por favor revise su correo', [
-          { text: 'Aceptar', onPress: () => navigation.navigate('Welcome') }
+        Alert.alert('Recovery email sent', 'Please check your inbox', [
+          { text: 'Accept', onPress: () => navigation.navigate('Welcome') }
         ])
       } catch (error) {
-        Alert.alert('Error', 'Correo electronico no reconocido', [
-          { text: 'Aceptar' }
+        Alert.alert('Error', 'Email not found', [
+          { text: 'Accept' }
         ])
       } finally {
         setRecoveryLoading(false)
