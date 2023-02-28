@@ -8,7 +8,7 @@ interface Props {
 
 const RecoveryScreen = (props: Props) => {
   return (
-    <AuthLayout backgroundName={'background-detail'}>
+    <AuthLayout backgroundName={'background-detail'} title={'Recovery'}>
       <RecoveryForm navigation={props.navigation} />
     </AuthLayout>
   )

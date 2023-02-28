@@ -33,44 +33,45 @@ const RegisterForm = () => {
         await signUp(email, password)
         navigation.navigate('Welcome' as never)
       } catch (e) {
-        Alert.alert('Error', 'Hubo un error en el registro', [{ text: 'Aceptar' }])
+        Alert.alert('Error', 'Sign up unsuccessful', [{ text: 'Accept' }])
       }
     }
   }
 
   return (
   <FormControl style={styles.form}>
-        <Text style={styles.label}>Correo electrónico</Text>
+        <Text style={styles.label}>Email</Text>
         <CustomInput
           // @ts-expect-error TS(2322)
-          onChangeText={(text: any) => setEmail(String(text).trim())}
+          onChangeText={(text: string) => setEmail(text.trim())}
           value={email} style={styles.input}
           keyboardType="email-address"
           autoCapitalize="none"
-          placeholder="Ingresa aquí tu correo electrónico"
+          placeholder="Enter Email"
           placeholderTextColor="#9e9e9e"
           error={emailError}
-          errorText={'Formato de email erroneo.'}
-          onChange={(_: any) => setEmailError(false)}
+          errorText={'Incorrect email format'}
+          onChange={() => setEmailError(false)}
         />
-        <Text style={styles.label}>Contraseña</Text>
+        <Text style={styles.label}>Password</Text>
         <CustomInput
           // @ts-expect-error TS(2322)
-          onChangeText={(text: any) => setPassword(String(text).trim())}
+          onChangeText={(text: string) => setPassword(text.trim())}
           value={password}
           secureTextEntry
           style={styles.input}
-          placeholder="Ingresa aquí tu contraseña"
+          placeholder="Enter Password"
           placeholderTextColor="#9e9e9e"
           error={passwordError}
-          errorText={'La contraseña debe ser de 8 caracteres, debe contener al menos una letra, un numero y un caracter especial.'}
-          onChange={(_: any) => setPasswordError(false)}
+          errorText={'Password must be 8 characters that contain a letter, a number and a special character'}
+          onChange={() => setPasswordError(false)}
           />
       <Button onPress={onRegisterPressed} style={styles.button}>
         {authLoading
           ? (<Spinner />)
-          : (<Text style={styles.buttonText}>Registrarse</Text>)}
+          : (<Text style={styles.buttonText}>Sign up</Text>)}
       </Button>
+        <Text style={styles.goBackText} onPress={() => navigation.navigate('Welcome' as never)}>Go back</Text>
     </FormControl>)
 }
 
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
   text: {
     color: '#445177'
   },
-  input: { color: '#000', fontSize: 16 },
+  input: { color: '#fff', fontSize: 16 },
   button: {
     marginVertical: 15,
     backgroundColor: '#FFD233'
@@ -92,6 +93,14 @@ const styles = StyleSheet.create({
     color: '#000',
     fontSize: 14,
     fontWeight: 'bold'
+  },
+  goBackText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#FFD233',
+    textAlign: 'center',
+    textDecorationLine: 'underline',
+    marginTop: 10
   }
 })
 

@@ -1,15 +1,16 @@
 import React from 'react'
 import { StyleSheet, Image } from 'react-native'
-import { Box } from 'native-base'
+import { Box, Text } from 'native-base'
 
 import assets from 'assets'
 
 interface IProps {
   backgroundName: string,
+  title: string,
   children: any
 }
 
-const AuthLayout = ({ backgroundName, children }: IProps) => {
+const AuthLayout = ({ backgroundName, title, children }: IProps) => {
   return (
     <Box style={styles.container}>
         <Image
@@ -18,6 +19,7 @@ const AuthLayout = ({ backgroundName, children }: IProps) => {
           resizeMode="contain"
         />
         <Box style={styles.content}>
+        <Text fontSize={32} style={styles.title}>{title}</Text>
           {children}
         </Box>
     </Box>
@@ -39,6 +41,12 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     justifyContent: 'center'
+  },
+  title: {
+    color: '#fff',
+    alignSelf: 'center',
+    position: 'absolute',
+    top: '10%'
   }
 })
 

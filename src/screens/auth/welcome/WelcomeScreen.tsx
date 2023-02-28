@@ -20,33 +20,33 @@ const WelcomeScreen = () => {
       !session.isAnonymous
     ) {
       Alert.alert(
-        'Verificación de Cuenta',
-        `Es necesario verificar la cuenta, favor de revisar su correo: ${
+        'Account not verified',
+        `It is required to confirm your email before accessing the platform ${
           session?.email
         }`,
         [
           {
-            text: 'Reenviar correo de confirmación',
+            text: 'Send verification email again',
             onPress: () => {
               auth()
                 .currentUser?.sendEmailVerification()
                 .then((_) =>
                   Alert.alert(
-                    'Operación exitosa',
-                    'Por favor revise su correo',
-                    [{ text: 'Aceptar', onPress: () => { auth().signOut().catch(e => console.error(e)) } }]
+                    'Email sent',
+                    'Please check your inbox',
+                    [{ text: 'Accept', onPress: () => { auth().signOut().catch(e => console.error(e)) } }]
                   )
                 )
                 .catch((_) =>
                   Alert.alert(
                     'Error',
-                    'No se pudo enviar el correo de verificación',
-                    [{ text: 'Aceptar' }]
+                    'The verification email could not be sent',
+                    [{ text: 'Accept' }]
                   )
                 )
             }
           },
-          { text: 'Aceptar', onPress: () => { auth().signOut().catch(e => console.error(e)) } }
+          { text: 'Accept', onPress: () => { auth().signOut().catch(e => console.error(e)) } }
         ]
       )
     }
@@ -61,8 +61,7 @@ const WelcomeScreen = () => {
   }
 
   return (
-    <AuthLayout backgroundName={'authBackground'}>
-      <Text fontSize={32} style={styles.welcomeText}>Welcome!</Text>
+    <AuthLayout backgroundName={'authBackground'} title={'Welcome!'}>
       <Button
         style={[styles.navigationButton, { backgroundColor: '#FFD233' }]}
         onPress={() => navigation.navigate('Signup' as never)}>
@@ -73,7 +72,7 @@ const WelcomeScreen = () => {
         onPress={() => navigation.navigate('Login' as never)}>
         <Text style={styles.navigationButtonText}>Log in</Text>
         </Button>
-      <Text fontSize={20} style={styles.recoveryText} onPress={() => navigation.navigate('Recovery' as never)}>Forgot password?</Text>
+      <Text fontSize={16} style={styles.recoveryText} onPress={() => navigation.navigate('Recovery' as never)}>Forgot password?</Text>
       <Text
         style={styles.anonText}
         onPress={() => { onAnonPressed().catch(e => console.error(e)) }}>
@@ -84,12 +83,6 @@ const WelcomeScreen = () => {
 }
 
 const styles = StyleSheet.create({
-  welcomeText: {
-    color: '#fff',
-    alignSelf: 'center',
-    position: 'absolute',
-    top: '10%'
-  },
   recoveryText: {
     color: '#fff',
     alignSelf: 'center'

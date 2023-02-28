@@ -42,28 +42,29 @@ const RecoveryForm = (props: Props) => {
 
   return (
     <FormControl style={styles.form}>
-        <Text style={styles.label}>Correo electrónico</Text>
+        <Text style={styles.label}>Email</Text>
         <CustomInput
           // @ts-expect-error TS(2322)
           style={styles.input}
-          onChangeText={(input: any) => setEmail(String(input).trim())}
+          onChangeText={(text: string) => setEmail(text.trim())}
           value={email}
           keyboardType="email-address"
           autoCapitalize="none"
-          placeholder="Ingresa aquí tu correo electrónico"
+          placeholder="Enter Email"
           placeholderTextColor="#9e9e9e"
           onSubmitEditing={recoverPassword}
           error={emailError}
-          errorText={'Error en formato de correo'}
-          onChange={(_: any) => setEmailError(false)}
+          errorText={'Incorrect email format'}
+          onChange={() => setEmailError(false)}
         />
       <Button
         onPress={() => { recoverPassword().catch(e => console.error(e)) }}
         style={styles.button}>
         {recoveryLoading
           ? (<Spinner />)
-          : (<Text style={styles.buttonText}>ENVIAR</Text>)}
+          : (<Text style={styles.buttonText}>Recover</Text>)}
       </Button>
+        <Text style={styles.goBackText} onPress={() => navigation.navigate('Welcome' as never)}>Go back</Text>
     </FormControl>
   )
 }
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
   text: {
     color: '#445177'
   },
-  input: { color: '#000', fontSize: 16 },
+  input: { color: '#fff', fontSize: 16 },
   button: {
     marginVertical: 15,
     backgroundColor: '#FFD233'
@@ -86,6 +87,14 @@ const styles = StyleSheet.create({
     color: '#000',
     fontSize: 14,
     fontWeight: 'bold'
+  },
+  goBackText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#FFD233',
+    textAlign: 'center',
+    textDecorationLine: 'underline',
+    marginTop: 10
   }
 })
 

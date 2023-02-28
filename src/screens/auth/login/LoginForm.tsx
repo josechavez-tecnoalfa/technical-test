@@ -10,11 +10,11 @@ import { useAuth } from 'hooks/useAuth'
 const LoginForm = () => {
   const navigation = useNavigation()
   const { signIn, authLoading } = useAuth()
-  const [email, setEmail] = React.useState('')
-  const [passwd, setPasswd] = React.useState('')
+  const [email, setEmail] = React.useState<string>('')
+  const [passwd, setPasswd] = React.useState<string>('')
 
-  const [emailError, setEmailError] = React.useState(false)
-  const [passwdError, setPasswdError] = React.useState(false)
+  const [emailError, setEmailError] = React.useState<boolean>(false)
+  const [passwdError, setPasswdError] = React.useState<boolean>(false)
 
   const onLoginPressed = async () => {
     let errorsFound = false
@@ -39,39 +39,40 @@ const LoginForm = () => {
 
   return (
       <FormControl style={styles.form}>
-        <Text style={styles.label}>Correo electrónico</Text>
+        <Text style={styles.label}>Email</Text>
         <CustomInput
           // @ts-expect-error TS(2322)
-          onChangeText={(text: any) => setEmail(String(text).trim())}
+          onChangeText={(text: string) => setEmail(text.trim())}
           style={styles.input}
           keyboardType="email-address"
           autoCapitalize="none"
-          placeholder="Ingresa aquí tu correo electrónico"
+          placeholder="Enter Email"
           placeholderTextColor="#9e9e9e"
           autoCorrect={false}
           onSubmitEditing={onLoginPressed}
           error={emailError}
-          errorText={'Error en formato de correo'}
-          onChange={(_: any) => setEmailError(false)}
+          errorText={'Incorrect email format'}
+          onChange={() => setEmailError(false)}
         />
         <Text style={styles.label}>Constraseña</Text>
         <CustomInput
             // @ts-expect-error TS(2322)
-            onChangeText={(text: any) => setPasswd(String(text).trim())}
+            onChangeText={(text: string) => setPasswd(text.trim())}
             secureTextEntry
             style={styles.input}
-            placeholder="Ingresa aquí tu contraseña"
+            placeholder="Enter Password"
             placeholderTextColor="#9e9e9e"
             onSubmitEditing={onLoginPressed}
             error={passwdError}
-            errorText={'No ingresaste contraseña'}
-            onChange={(_: any) => setPasswdError(false)}
+            errorText={'No password entered'}
+            onChange={() => setPasswdError(false)}
           />
-        <Button onPress={() => { onLoginPressed().catch(e => console.error(e)) }} style={styles.button} >
+        <Button onPress={() => { onLoginPressed().catch(e => console.error(e)) }} style={styles.button}>
           {authLoading
             ? (<Spinner />)
             : (<Text style={styles.buttonText}>Iniciar Sesión</Text>)}
         </Button>
+        <Text style={styles.goBackText} onPress={() => navigation.navigate('Welcome' as never)}>Go back</Text>
       </FormControl>
   )
 }
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
   text: {
     color: '#445177'
   },
-  input: { color: '#000', fontSize: 16 },
+  input: { color: '#fff', fontSize: 16 },
   button: {
     marginVertical: 15,
     backgroundColor: '#FFD233'
@@ -94,6 +95,14 @@ const styles = StyleSheet.create({
     color: '#000',
     fontSize: 14,
     fontWeight: 'bold'
+  },
+  goBackText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#FFD233',
+    textAlign: 'center',
+    textDecorationLine: 'underline',
+    marginTop: 10
   }
 })
 
