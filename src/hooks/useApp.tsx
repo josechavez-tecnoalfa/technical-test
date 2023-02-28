@@ -1,14 +1,15 @@
 import React from 'react'
+import { AppContextType } from 'interfaces/IApp'
 
-const AppContext = React.createContext(null)
+// @ts-expect-error TS(2322)
+const AppContext = React.createContext<AppContextType>()
 
 export function AppProvider (props: any) {
-  const [token, setToken] = React.useState(null)
-  const [role, setRole] = React.useState(null)
+  const [token, setToken] = React.useState<string | null>(null)
 
   const memData = React.useMemo(() => {
-    return { token, setToken, role, setRole }
-  }, [token, setToken, role])
+    return { token, setToken }
+  }, [token, setToken])
 
   return <AppContext.Provider value={memData} {...props} />
 }

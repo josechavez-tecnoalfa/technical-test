@@ -1,9 +1,10 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import {
+  WelcomeScreen,
   LoginScreen,
   RegisterScreen,
-  RecoveryScreen,
+  RecoveryScreen
 } from 'screens/auth'
 
 const Stack = createStackNavigator()
@@ -12,16 +13,19 @@ const screenOptions = { headerShown: false }
 
 const AuthStack = () => {
   return (
-    <Stack.Navigator
-      screenOptions={{ presentation: 'modal' }}
-    >
+    <Stack.Navigator >
+      <Stack.Screen
+        name="Welcome"
+        component={WelcomeScreen}
+        options={screenOptions}
+      />
       <Stack.Screen
         name="Login"
         component={LoginScreen}
         options={screenOptions}
       />
       <Stack.Screen
-        name="Register"
+        name="Signup"
         component={RegisterScreen}
         options={screenOptions}
       />

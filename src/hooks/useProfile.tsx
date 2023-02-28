@@ -1,6 +1,5 @@
 import React from 'react'
 import { Platform } from 'react-native'
-import { check, request, PERMISSIONS } from 'react-native-permissions'
 import notifee, { AndroidColor, AndroidImportance, AndroidVisibility } from '@notifee/react-native'
 
 import firestore from '@react-native-firebase/firestore'
@@ -11,7 +10,6 @@ import { useAuth } from './useAuth'
 const ProfileContext = React.createContext()
 
 export function ProfileProvider (props: any) {
-
   const { uid, isAnonymous } = useAuth()
 
   const profileRef = uid ? firestore().collection('profiles').doc(uid) : undefined
@@ -53,12 +51,10 @@ export function ProfileProvider (props: any) {
           profile &&
            Array.isArray(profile.fcm) &&
            !profile.fcm.includes(fcmToken)) {
-
           await profileRef.update({
             fcm: [...profile.fcm, fcmToken]
           })
         } else if (fcmToken && profile && !profile.fcm) {
-
           await profileRef.update({
             fcm: [fcmToken]
           })
@@ -87,7 +83,6 @@ export function ProfileProvider (props: any) {
           importance: AndroidImportance.HIGH
         })
 
-
         if (message?.messageId) obj = { ...obj, messageId: message.messageId }
 
         if (message?.notification?.title) obj = { ...obj, title: message.notification.title }
@@ -111,20 +106,20 @@ export function ProfileProvider (props: any) {
         }
 
         shown = Platform.OS === 'ios'
-    ? { title: (obj as any).title, body: (obj as any).body }
-    : {
-        title: (obj as any).title,
-        body: (obj as any).body,
-        android: {
-            channelId,
-            name: 'Android Notifications',
-            sound: 'notification',
-            vibrationPattern: [300, 500],
-            lights: [AndroidColor.RED, 300, 600],
-            visibility: AndroidVisibility.PUBLIC,
-            importance: AndroidImportance.HIGH
-        }
-    };
+          ? { title: (obj as any).title, body: (obj as any).body }
+          : {
+              title: (obj as any).title,
+              body: (obj as any).body,
+              android: {
+                channelId,
+                name: 'Android Notifications',
+                sound: 'notification',
+                vibrationPattern: [300, 500],
+                lights: [AndroidColor.RED, 300, 600],
+                visibility: AndroidVisibility.PUBLIC,
+                importance: AndroidImportance.HIGH
+              }
+            }
         await notificationsRef.add(obj)
         await profileRef.update({ notifications: firestore.FieldValue.increment(1) })
         await notifee.displayNotification(shown)

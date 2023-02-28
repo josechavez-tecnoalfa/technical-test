@@ -1,7 +1,7 @@
 import React from 'react'
+import { Icon } from 'native-base'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-
-import { useApp } from 'hooks/useApp'
+import { HomeScreen, ProfileScreen } from 'screens/main'
 
 const Tabs = createBottomTabNavigator()
 
@@ -12,22 +12,13 @@ const tabBarOpts = {
 }
 
 const MainTabs = () => {
-
-  // @ts-expect-error TS(2339) FIXME: Property 'role' does not exist on type 'unknown'.
-  const { role } = useApp()
-
-  const [isVisible, setIsVisible] = React.useState(false)
-
-  React.useLayoutEffect(() => {
-    if (role === 'subscriber') setIsVisible(true)
-  }, [role])
-
   const getTabBarIcon = ({
     color
   }: any) => (
     <Icon
       type="MaterialIcons"
       name="home-repair-service"
+        // @ts-expect-error TS(2322)
       style={{ color }}
     />
   )
@@ -40,9 +31,7 @@ const MainTabs = () => {
       <Tabs.Screen
         name="Home"
         options={{
-          headerShown: false,
           tabBarIcon: getTabBarIcon,
-          tabBarStyle: { display: isVisible ? 'flex' : 'none' },
           title: 'Inicio'
         }}
         component={HomeScreen}
@@ -50,7 +39,6 @@ const MainTabs = () => {
       <Tabs.Screen
         name="Profile"
         options={{
-          headerShown: false,
           tabBarIcon: getTabBarIcon,
           title: 'Cuenta'
         }}

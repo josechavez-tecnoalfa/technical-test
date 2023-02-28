@@ -2,31 +2,77 @@ import React from 'react'
 import auth from '@react-native-firebase/auth'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useApp } from './useApp'
+import { IAuth } from 'interfaces/IAuth'
 
-const AuthContext = React.createContext(null)
+// @ts-expect-error TS(2322)
+const AuthContext = React.createContext<IAuth>()
 
 export function AuthProvider (props: any) {
-  const { token, setToken, setRole } = useApp()
+  const { setToken } = useApp()
 
   const [uid, setUid] = React.useState<string>('')
   const [isAnonymous, setIsAnonymous] = React.useState<Boolean>(false)
-
   const [authLoading, setAuthLoading] = React.useState<Boolean>(false)
 
   const [session, sessionLoading] = useAuthState(auth())
 
-  const signUp = async () => {}
+  const signUp = async (email: string, password: string) => {
+    try {
+      setAuthLoading(true)
+      const res = await auth().createUserWithEmailAndPassword(email, password)
+      if (res && res.user && !res.user.emailVerified) {
+        await res.user.sendEmailVerification()
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setAuthLoading(false)
+    }
+  }
 
-  const signIn = async () => {}
+  const signIn = async (email: string, password: string) => {
+    try {
+      setAuthLoading(true)
+      await auth().signInWithEmailAndPassword(email, password)
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setAuthLoading(false)
+    }
+  }
 
-  const signInAnonymously = async () => {}
+  const signInAnonymously = async () => {
+    try {
+      setAuthLoading(true)
+      await auth().signInAnonymously()
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setAuthLoading(false)
+    }
+  }
 
-  const signOut = async () => {}
+  const signOut = async () => {
+    try {
+      setAuthLoading(true)
+      await auth().signOut()
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setAuthLoading(false)
+    }
+  }
 
-  const onTokenChange = async () => {}
+  const onTokenChange = (userCredential: any) => {
+    if (userCredential) {
+      userCredential.getIdToken().then((newToken: any) => {
+        setToken(newToken)
+      })
+    }
+  }
 
   React.useEffect(() => {
-    if ( session?.uid && !session?.isAnonymous ) {
+    if (session?.uid && !session?.isAnonymous) {
       setUid(session.uid)
     } else {
       setUid('')

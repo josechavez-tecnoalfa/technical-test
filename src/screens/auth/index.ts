@@ -1,9 +1,11 @@
-import LoginScreen from './LoginScreen'
-import RegisterScreen from './RegisterScreen'
-import RecoveryScreen from './RecoveryScreen'
+import WelcomeScreen from './welcome/WelcomeScreen'
+import LoginScreen from './login/LoginScreen'
+import RegisterScreen from './register/RegisterScreen'
+import RecoveryScreen from './recovery/RecoveryScreen'
 
 export {
-    LoginScreen,
-    RegisterScreen,
-    RecoveryScreen
+  WelcomeScreen,
+  LoginScreen,
+  RegisterScreen,
+  RecoveryScreen
 }
