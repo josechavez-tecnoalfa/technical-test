@@ -2,19 +2,16 @@ import React from 'react'
 import { StyleSheet, Alert } from 'react-native'
 import { Button, Text, Spinner, FormControl } from 'native-base'
 import { firebase } from '@react-native-firebase/auth'
+import { useNavigation } from '@react-navigation/native'
 
 import { regexes } from 'constants/regexes'
 import CustomInput from 'components/CustomInput'
 
-interface Props {
-  navigation: any
-}
-
-const RecoveryForm = (props: Props) => {
-  const { navigation } = props
-  const [email, setEmail] = React.useState('')
-  const [emailError, setEmailError] = React.useState(false)
-  const [recoveryLoading, setRecoveryLoading] = React.useState(false)
+const RecoveryForm = () => {
+  const navigation = useNavigation()
+  const [email, setEmail] = React.useState<string>('')
+  const [emailError, setEmailError] = React.useState<boolean>(false)
+  const [recoveryLoading, setRecoveryLoading] = React.useState<boolean>(false)
 
   const recoverPassword = async () => {
     let errorsFound = false
@@ -28,7 +25,7 @@ const RecoveryForm = (props: Props) => {
         setRecoveryLoading(true)
         await firebase.auth().sendPasswordResetEmail(email)
         Alert.alert('Recovery email sent', 'Please check your inbox', [
-          { text: 'Accept', onPress: () => navigation.navigate('Welcome') }
+          { text: 'Accept', onPress: () => navigation.navigate('Welcome' as never) }
         ])
       } catch (error) {
         Alert.alert('Error', 'Email not found', [

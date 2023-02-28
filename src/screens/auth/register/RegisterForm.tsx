@@ -11,11 +11,11 @@ const RegisterForm = () => {
   const navigation = useNavigation()
   const { signUp, authLoading } = useAuth()
 
-  const [email, setEmail] = React.useState('')
-  const [password, setPassword] = React.useState('')
+  const [email, setEmail] = React.useState<string>('')
+  const [password, setPassword] = React.useState<string>('')
 
-  const [emailError, setEmailError] = React.useState(false)
-  const [passwordError, setPasswordError] = React.useState(false)
+  const [emailError, setEmailError] = React.useState<boolean>(false)
+  const [passwordError, setPasswordError] = React.useState<boolean>(false)
 
   const onRegisterPressed = async () => {
     let errorsFound = false
