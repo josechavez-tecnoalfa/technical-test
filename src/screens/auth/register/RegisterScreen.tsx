@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   formCard: {
     height: '50%',
     width: '100%',
-    backgroundColor: '#000',
+    backgroundColor: '#191919',
     borderTopLeftRadius: 33,
     borderTopRightRadius: 33,
     opacity: 0.7

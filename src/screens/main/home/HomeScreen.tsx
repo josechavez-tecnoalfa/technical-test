@@ -1,9 +1,9 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import MainLayout from 'layouts/MainLayout'
 
 const HomeScreen = () => {
   return (
-    <View><Text>Home Screen</Text></View>
+    <MainLayout><></></MainLayout>
   )
 }
 

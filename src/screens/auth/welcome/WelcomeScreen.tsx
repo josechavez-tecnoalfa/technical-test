@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
   navigationButtonText: {
     fontSize: 20,
-    color: '#000',
+    color: '#191919',
     fontWeight: 'bold'
   }
 })

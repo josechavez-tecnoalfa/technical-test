@@ -56,6 +56,7 @@ export function AuthProvider (props: any) {
     try {
       setAuthLoading(true)
       await auth().signOut()
+      setToken(null)
     } catch (error) {
       console.log(error)
     } finally {
