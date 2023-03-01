@@ -2,7 +2,7 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import MainTabs from './MainTabs'
-import { DetailScreen } from 'screens/main'
+import { SerieScreen, SerieDetailScreen, RecentDetailScreen } from 'screens/main'
 
 const Stack = createStackNavigator()
 
@@ -22,8 +22,18 @@ const MainStack = () => {
         options={options}
       />
       <Stack.Screen
-        name="Detail"
-        component={DetailScreen}
+        name="Serie"
+        component={SerieScreen}
+        options={options}
+      />
+      <Stack.Screen
+        name="SerieDetail"
+        component={SerieDetailScreen}
+        options={options}
+      />
+      <Stack.Screen
+        name="RecentDetail"
+        component={RecentDetailScreen}
         options={options}
       />
     </Stack.Navigator>

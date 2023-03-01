@@ -1,7 +1,9 @@
 import HomeScreen from './home/HomeScreen'
-import DetailScreen from './home/DetailScreen'
+import SerieScreen from './serie/SerieScreen'
+import SerieDetailScreen from './SerieDetailScreen'
 import FavoriteScreen from './favorite/FavoriteScreen'
 import RecentScreen from './recent/RecentScreen'
+import RecentDetailScreen from './recent/RecentDetailScreen'
 import SearchScreen from './search/SearchScreen'
 
-export { HomeScreen, DetailScreen, FavoriteScreen, RecentScreen, SearchScreen }
+export { HomeScreen, SerieScreen, SerieDetailScreen, FavoriteScreen, RecentScreen, RecentDetailScreen, SearchScreen }
