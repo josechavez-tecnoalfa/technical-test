@@ -61,7 +61,7 @@ const WelcomeScreen = () => {
   }
 
   return (
-    <AuthLayout backgroundName={'authBackground'} title={'Welcome!'}>
+    <AuthLayout backgroundName={'authBackground'} title={'Welcome!'} showCard={false}>
       <Button
         style={[styles.navigationButton, { backgroundColor: '#FFD233' }]}
         onPress={() => navigation.navigate('Signup' as never)}>
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
   navigationButtonText: {
     fontSize: 20,
-    color: '#191919',
+    color: '#000',
     fontWeight: 'bold'
   }
 })

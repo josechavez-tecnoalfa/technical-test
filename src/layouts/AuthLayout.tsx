@@ -1,16 +1,17 @@
 import React from 'react'
 import { StyleSheet, Image } from 'react-native'
-import { Box, Text } from 'native-base'
+import { Box, Card, Text } from 'native-base'
 
 import assets from 'assets'
 
 interface IProps {
-  backgroundName?: string,
   title: string,
-  children: any
+  children: any,
+  showCard?: boolean,
+  backgroundName?: string,
 }
 
-const AuthLayout = ({ title, children, backgroundName = 'authBackground' }: IProps) => {
+const AuthLayout = ({ title, children, showCard = true, backgroundName = 'authBackground' }: IProps) => {
   return (
     <Box style={styles.container}>
         <Image
@@ -19,8 +20,12 @@ const AuthLayout = ({ title, children, backgroundName = 'authBackground' }: IPro
           resizeMode="contain"
         />
         <Box style={styles.content}>
-        <Text fontSize={32} style={styles.title}>{title}</Text>
-          {children}
+          <Text fontSize={32} style={styles.title}>{title}</Text>
+          {showCard
+            ? <Card style={styles.formCard}>
+            {children}
+          </Card>
+            : children }
         </Box>
     </Box>
   )
@@ -29,7 +34,7 @@ const AuthLayout = ({ title, children, backgroundName = 'authBackground' }: IPro
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#191919'
+    backgroundColor: '#000'
   },
   image: {
     alignSelf: 'center',
@@ -47,6 +52,14 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     position: 'absolute',
     top: '10%'
+  },
+  formCard: {
+    height: '50%',
+    width: '100%',
+    backgroundColor: '#000',
+    borderTopLeftRadius: 33,
+    borderTopRightRadius: 33,
+    opacity: 0.7
   }
 })
 
