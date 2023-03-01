@@ -1,7 +1,7 @@
 import React from 'react'
 import firebase from '@react-native-firebase/app'
-
-const baseUrl = 'https://api.themoviedb.org/3'
+// @ts-expect-error TS(2322)
+import { BASE_URL, ACCESS_TOKEN, API_KEY } from '@env'
 
 const defaultHeaders = {
   'Content-Type': 'application/json',
@@ -11,7 +11,7 @@ const defaultHeaders = {
 const makeHeaders = (token: any) => token
   ? {
       ...defaultHeaders,
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${ACCESS_TOKEN}`
     }
   : defaultHeaders
 
@@ -62,10 +62,10 @@ export function useHttp ({ req = 'GET', url = null, params = {}, body = {} }) {
         }
 
         const paramsFinal = { ...params, ...inlineParams }
-        const str = `${baseUrl}${url}${
+        const str = `${BASE_URL}${url}${
           params && Object.keys(paramsFinal).length > 0
-            ? `?${paramsToQuery(paramsFinal)}`
-            : ''
+            ? `?${paramsToQuery(paramsFinal)}&api_key=${API_KEY}`
+            : `?api_key=${API_KEY}`
         }`
         const httpRes = await fetch(str, fetchReq)
         const resBody = await httpRes.json()

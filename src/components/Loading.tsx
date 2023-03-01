@@ -4,7 +4,7 @@ import AuthLayout from 'layouts/AuthLayout'
 
 const Loading = () => {
   return (
-    <AuthLayout title={'Loading...'}>
+    <AuthLayout title={'Loading...'} showCard={false}>
     <HStack space={3} alignSelf={'center'}>
       <Spinner size={'lg'} color={'#FFD233'} />
     </HStack>;
