@@ -1,4 +1,4 @@
 import AuthStack from './AuthStack'
-import MainTabs from './MainTabs'
+import MainStack from './MainStack'
 
-export { AuthStack, MainTabs }
+export { AuthStack, MainStack }

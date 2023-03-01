@@ -4,7 +4,7 @@ import RNBootSplash from 'react-native-bootsplash'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import { AuthStack, MainTabs } from 'navigations'
+import { AuthStack, MainStack } from 'navigations'
 import { AppProvider, useApp } from 'hooks/useApp'
 import { AuthProvider } from 'hooks/useAuth'
 // import { ProfileProvider } from 'hooks/useProfile'
@@ -21,7 +21,7 @@ const RootComponent = () => {
   if (token) {
     return (
     // <ProfileProvider>
-          <MainTabs />
+          <MainStack />
     // </ProfileProvider>
     )
   }
