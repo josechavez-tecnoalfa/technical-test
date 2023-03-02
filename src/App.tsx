@@ -7,7 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { AuthStack, MainStack } from 'navigations'
 import { AppProvider, useApp } from 'hooks/useApp'
 import { AuthProvider, useAuth } from 'hooks/useAuth'
-import Loading from 'components/Loading'
+import AuthLoading from 'components/AuthLoading'
 // import { ProfileProvider } from 'hooks/useProfile'
 
 const RootStack = createStackNavigator()
@@ -20,7 +20,7 @@ const RootComponent = () => {
     RNBootSplash.hide({ fade: true }).catch(e => console.error(e))
   }, [])
 
-  if (authLoading) return <Loading/>
+  if (authLoading) return <AuthLoading/>
 
   if (token) {
     return (

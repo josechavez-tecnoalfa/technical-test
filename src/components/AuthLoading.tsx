@@ -2,7 +2,7 @@ import React from 'react'
 import { HStack, Spinner } from 'native-base'
 import AuthLayout from 'layouts/AuthLayout'
 
-const Loading = () => {
+const AuthLoading = () => {
   return (
     <AuthLayout title={'Loading...'} showCard={false}>
     <HStack space={3} alignSelf={'center'}>
@@ -12,4 +12,4 @@ const Loading = () => {
   )
 }
 
-export default Loading
+export default AuthLoading

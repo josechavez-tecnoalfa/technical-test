@@ -14,10 +14,9 @@ const tabOptions = {
 }
 
 const options = {
-  headerBackgroundContainerStyle: { backgroundColor: '#191919' },
-  headerTransparent: true,
   headerTitleStyle: { color: '#fff', fontWeight: '200' },
-  headerRight: () => <UserMenu />
+  headerRight: () => <UserMenu />,
+  headerStyle: { backgroundColor: '#191919' }
 }
 
 const MainTabs = () => {
