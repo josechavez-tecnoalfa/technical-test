@@ -11,7 +11,7 @@ const PopularList = ({ list }: IProps) => {
   return (
     <FlatList
       data={list || []}
-      renderItem={({ item, index }) => <PopularListElement item={item} index={index} />}
+      renderItem={({ item, index }) => <PopularListElement item={item} index={index} list={list} />}
       horizontal
       />
   )

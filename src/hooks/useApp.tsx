@@ -1,8 +1,13 @@
 import React from 'react'
+import { LogBox } from 'react-native'
 import { AppContextType } from 'interfaces/IApp'
 
 // @ts-expect-error TS(2322)
 const AppContext = React.createContext<AppContextType>()
+
+LogBox.ignoreLogs([
+  'VirtualizedLists should'
+])
 
 export function AppProvider (props: any) {
   const [token, setToken] = React.useState<string | null>(null)

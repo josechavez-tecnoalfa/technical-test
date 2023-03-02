@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 import { deviceWidth } from 'constants/dimensions'
 // @ts-expect-error TS(7016) FIXME\
 import Carousel, { Pagination } from 'react-native-snap-carousel'
+import PopularCarouselElement from './PopularCarouselElement'
 class InnerCarousel extends Component {
   _carousel: any
   render () {
@@ -28,20 +29,18 @@ type AdComponentProps = {
 const AdComponent = ({ item, onNavigate }: AdComponentProps) => {
   return (
     <View style={styles.carouselContent}>
-
+      <PopularCarouselElement item={item} onNavigate={onNavigate}/>
     </View>
   )
 }
 
 type PopularCarouselProps = {
-    orders?: any;
-    loading?: any;
+    list?: any;
     item?: any;
-    toggleOverlay?: (...args: any[]) => any;
 };
 
 const PopularCarousel = (props: PopularCarouselProps) => {
-  const { orders, toggleOverlay } = props
+  const { list, item } = props
   const navigation = useNavigation()
   const [activeSlide, setActiveSlide] = React.useState(0)
 
@@ -66,32 +65,24 @@ const PopularCarousel = (props: PopularCarouselProps) => {
   }
 
   const onNavigate = (item: any) => {
-    if (item && item.active && item.id) {
-      // @ts-expect-error TS(2345) FIXME: Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
-      navigation.navigate('Modals', {
-        screen: 'MapsModal',
-        params: {
-          orderId: item.id
-        }
-      })
-
-      // @ts-expect-error TS(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-      toggleOverlay()
-    } else if (item && !item.active && item.id) {
-      // @ts-expect-error TS(2345) FIXME: Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
-      navigation.navigate('Modals', {
-        screen: 'TicketModal',
-        params: {
-          orderId: item.id
-        }
-      })
-
-      // @ts-expect-error TS(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-      toggleOverlay()
-    }
+    navigation.navigate('Modals' as never, {
+      screen: 'Detail',
+      params: {
+        item
+      }
+    } as never)
   }
 
   const MemoizedComponent = React.useMemo(() => AdComponent, [])
+
+  React.useEffect(() => {
+    if (item) {
+      const index = list?.findIndex((i: any) => i.id === item.id)
+      if (index) {
+        setActiveSlide(index)
+      }
+    }
+  }, [list, item])
 
   return (
     <View style={styles.main}>
@@ -100,7 +91,7 @@ const PopularCarousel = (props: PopularCarouselProps) => {
           // @ts-expect-error TS(2769) FIXME: No overload matches this call.
           sliderWidth={deviceWidth}
           itemWidth={deviceWidth}
-          data={orders || []}
+          data={list || []}
           renderItem={({
             item
           }: any) => <MemoizedComponent item={item} onNavigate={onNavigate} />}
@@ -109,7 +100,7 @@ const PopularCarousel = (props: PopularCarouselProps) => {
           ref={carouselRef}
         />
         {
-          orders && orders.length > 1 &&
+          list && list.length > 1 &&
           <>
             <Pressable onPress={snapBack} style={[styles.arrowContainer, { left: 1 }]}>
               <ArrowBackIcon style={styles.arrowIcon}/>
@@ -121,7 +112,7 @@ const PopularCarousel = (props: PopularCarouselProps) => {
         }
       </View>
       <Pagination
-        dotsLength={orders?.length < 10 ? orders.length : 0}
+        dotsLength={list?.length < 10 ? list.length : 0}
         activeDotIndex={activeSlide}
         containerStyle={styles.paginationContainer}
         dotStyle={styles.paginationDot}
