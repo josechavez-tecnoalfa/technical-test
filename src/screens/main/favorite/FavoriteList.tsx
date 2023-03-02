@@ -11,7 +11,6 @@ const FavoriteList = ({ list }: IProps) => {
     <FlatList
       data={list || []}
       renderItem={({ item, index }) => <FavoriteListElement item={item} index={index} />}
-      scrollEnabled={false}
     />
   )
 }

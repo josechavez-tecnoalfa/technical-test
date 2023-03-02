@@ -1,6 +1,6 @@
 import HomeScreen from './home/HomeScreen'
 import SerieScreen from './serie/SerieScreen'
-import SerieDetailScreen from './SerieDetailScreen'
+import SerieDetailScreen from './serie/SerieDetailScreen'
 import FavoriteScreen from './favorite/FavoriteScreen'
 import RecentScreen from './recent/RecentScreen'
 import RecentDetailScreen from './recent/RecentDetailScreen'
