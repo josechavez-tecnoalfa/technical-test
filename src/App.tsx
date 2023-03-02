@@ -8,7 +8,6 @@ import { AuthStack, MainStack } from 'navigations'
 import { AppProvider, useApp } from 'hooks/useApp'
 import { AuthProvider, useAuth } from 'hooks/useAuth'
 import AuthLoading from 'components/AuthLoading'
-// import { ProfileProvider } from 'hooks/useProfile'
 
 const RootStack = createStackNavigator()
 
@@ -21,15 +20,7 @@ const RootComponent = () => {
   }, [])
 
   if (authLoading) return <AuthLoading/>
-
-  if (token) {
-    return (
-    // <ProfileProvider>
-          <MainStack />
-    // </ProfileProvider>
-    )
-  }
-
+  if (token) return <MainStack />
   return <AuthStack />
 }
 

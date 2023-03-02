@@ -1,7 +1,6 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-
-import { SerieScreen, SerieDetailScreen, RecentDetailScreen } from 'screens/main'
+import { DetailScreen, PopularScreen, RecentDetailScreen } from 'screens/main'
 
 const Stack = createStackNavigator()
 
@@ -14,17 +13,17 @@ const options = {
 const ModalStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Serie"
+      initialRouteName="Detail"
     >
       <Stack.Screen
-        name="Serie"
-        component={SerieScreen}
+        name="Detail"
+        component={DetailScreen}
         // @ts-expect-error TS(2322)
         options={options}
       />
       <Stack.Screen
-        name="SerieDetail"
-        component={SerieDetailScreen}
+        name="Popular"
+        component={PopularScreen}
         // @ts-expect-error TS(2322)
         options={options}
       />

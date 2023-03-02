@@ -1,6 +1,5 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-
 import MainTabs from './MainTabs'
 import ModalStack from './ModalStack'
 

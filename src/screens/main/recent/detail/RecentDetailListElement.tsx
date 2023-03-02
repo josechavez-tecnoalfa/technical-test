@@ -11,23 +11,25 @@ interface IProps {
 
 const RecentListElement = ({ item, index }: IProps) => {
   return (
-    <Box flexDirection={'column'} width={'100%'} alignItems={'center'} padding={10}>
-      <Image
+    <Box flexDirection={'column'} width={'100%'} alignItems={'center'} padding={4}>
+      <Text color={'#fff'} fontSize={30} fontWeight={'bold'}>{item?.name || 'No Name'}</Text>
+      {item?.poster_path
+        ? <Image
         key={item}
         style={styles.posterImage}
         resizeMode="cover"
         source={{ uri: `${IMAGES_BASE_URL}${item.poster_path}` }}
       />
-      <Text color={'#fff'} fontSize={30} fontWeight={'bold'}>{item?.name || 'No Name'}</Text>
-      <Text color={'#8C8C8C'} >{'3 episodes of 20'}</Text>
-      <Text color={'#FFD233'} alignSelf={'flex-end'} marginTop={5}>{'Go to view  >'}</Text>
+        : <View style={styles.posterImage}><Text alignSelf={'center'} fontSize={20} color={'#fff'} marginTop={5}>Sin imágen</Text></View>}
+      <Text color={'#8C8C8C'}>Fecha de lanzamiento: {item?.air_date}</Text>
+      <Text color={'#FFD233'} alignSelf={'flex-end'} marginTop={5}>{'Watch now  >'}</Text>
       <View height={0.25} width={'96%'} backgroundColor={'#8C8C8C'} alignSelf={'center'} marginTop={5}/>
     </Box>
   )
 }
 
 const styles = StyleSheet.create({
-  posterImage: { width: '100%', height: 300, borderRadius: 10 },
+  posterImage: { width: '100%', height: 300, borderRadius: 10, backgroundColor: '#8C8C8C' },
   ratingIcon: { margin: 2, marginTop: 10 }
 })
 

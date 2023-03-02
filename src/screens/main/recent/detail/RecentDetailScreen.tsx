@@ -13,8 +13,6 @@ const RecentDetailScreen = ({ route }: IProps) => {
 
   const [recentDetail, recentDetailLoading, recentDetailError] = useModels({ name: `tv/${item?.id}/season/1` })
 
-  console.log(recentDetail)
-
   React.useEffect(() => {
     if (recentDetailError) alert(recentDetailError)
   }, [recentDetailError])
@@ -24,7 +22,7 @@ const RecentDetailScreen = ({ route }: IProps) => {
   return (
     <MainLayout>
         {/* @ts-expect-error TS(2322) */}
-        <RecentDetailList list={recentDetail?.results} />
+        <RecentDetailList list={recentDetail?.episodes} />
     </MainLayout>
   )
 }

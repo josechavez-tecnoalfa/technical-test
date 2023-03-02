@@ -1,7 +1,7 @@
 import MainLayout from 'layouts/MainLayout'
 import React from 'react'
 
-const SerieScreen = () => {
+const PopularScreen = () => {
   return (
     <MainLayout>
       <></>
@@ -9,4 +9,4 @@ const SerieScreen = () => {
   )
 }
 
-export default SerieScreen
+export default PopularScreen
