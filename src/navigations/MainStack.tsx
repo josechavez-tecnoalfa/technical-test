@@ -2,7 +2,7 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import MainTabs from './MainTabs'
-import { SerieScreen, SerieDetailScreen, RecentDetailScreen } from 'screens/main'
+import ModalStack from './ModalStack'
 
 const Stack = createStackNavigator()
 
@@ -17,23 +17,13 @@ const MainStack = () => {
       screenOptions={{ presentation: 'transparentModal' }}
     >
       <Stack.Screen
-        name="MainTabs"
+        name="Main"
         component={MainTabs}
         options={options}
       />
       <Stack.Screen
-        name="Serie"
-        component={SerieScreen}
-        options={options}
-      />
-      <Stack.Screen
-        name="SerieDetail"
-        component={SerieDetailScreen}
-        options={options}
-      />
-      <Stack.Screen
-        name="RecentDetail"
-        component={RecentDetailScreen}
+        name="Modals"
+        component={ModalStack}
         options={options}
       />
     </Stack.Navigator>
