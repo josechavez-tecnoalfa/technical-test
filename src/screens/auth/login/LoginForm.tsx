@@ -30,7 +30,6 @@ const LoginForm = () => {
     if (!errorsFound) {
       try {
         await signIn(email, passwd)
-        navigation.navigate('Welcome' as never)
       } catch (e) {
         console.error(e)
       }

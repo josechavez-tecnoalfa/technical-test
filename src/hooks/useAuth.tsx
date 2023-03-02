@@ -16,7 +16,7 @@ export function AuthProvider (props: any) {
 
   const [session, sessionLoading] = useAuthState(auth())
 
-  const signUp = async (email: string, password: string) => {
+  const signUp = React.useCallback(async (email: string, password: string) => {
     try {
       setAuthLoading(true)
       const res = await auth().createUserWithEmailAndPassword(email, password)
@@ -24,35 +24,35 @@ export function AuthProvider (props: any) {
         await res.user.sendEmailVerification()
       }
     } catch (error) {
-      console.log(error)
+      alert(error)
     } finally {
       setAuthLoading(false)
     }
-  }
+  }, [])
 
-  const signIn = async (email: string, password: string) => {
+  const signIn = React.useCallback(async (email: string, password: string) => {
     try {
       setAuthLoading(true)
       await auth().signInWithEmailAndPassword(email, password)
     } catch (error) {
-      console.log(error)
+      alert(error)
     } finally {
       setAuthLoading(false)
     }
-  }
+  }, [])
 
-  const signInAnonymously = async () => {
+  const signInAnonymously = React.useCallback(async () => {
     try {
       setAuthLoading(true)
       await auth().signInAnonymously()
     } catch (error) {
-      console.log(error)
+      alert(error)
     } finally {
       setAuthLoading(false)
     }
-  }
+  }, [])
 
-  const signOut = async () => {
+  const signOut = React.useCallback(async () => {
     try {
       setAuthLoading(true)
       await auth().signOut()
@@ -62,15 +62,15 @@ export function AuthProvider (props: any) {
     } finally {
       setAuthLoading(false)
     }
-  }
+  }, [])
 
-  const onTokenChange = (userCredential: any) => {
+  const onTokenChange = React.useCallback((userCredential: any) => {
     if (userCredential) {
       userCredential.getIdToken().then((newToken: any) => {
         setToken(newToken)
       })
     }
-  }
+  }, [])
 
   React.useEffect(() => {
     if (session?.uid && !session?.isAnonymous) {

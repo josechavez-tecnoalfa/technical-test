@@ -6,20 +6,17 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import { AuthStack, MainStack } from 'navigations'
 import { AppProvider, useApp } from 'hooks/useApp'
-import { AuthProvider, useAuth } from 'hooks/useAuth'
-import AuthLoading from 'components/AuthLoading'
+import { AuthProvider } from 'hooks/useAuth'
 
 const RootStack = createStackNavigator()
 
 const RootComponent = () => {
   const { token } = useApp()
-  const { authLoading } = useAuth()
 
   React.useLayoutEffect(() => {
     RNBootSplash.hide({ fade: true }).catch(e => console.error(e))
   }, [])
 
-  if (authLoading) return <AuthLoading/>
   if (token) return <MainStack />
   return <AuthStack />
 }
